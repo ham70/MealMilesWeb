@@ -1,6 +1,6 @@
 // src/pages/RestaurantItemPage.tsx
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import { useCart } from '../contexts/CartContext'
 import BottomNav from '../components/BottomNav'

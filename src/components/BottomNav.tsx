@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { CartProvider, useCart } from '../contexts/CartContext'
+import { useCart } from '../contexts/CartContext'
 import './BottomNav.css'
 
 export default function BottomNav(){
