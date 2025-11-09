@@ -25,6 +25,11 @@ export default function AppRoutes() {
           path="/account"
           element={session ? <Account /> : <Navigate to="/auth" replace />}
         />
+        {/* Protected routes using ternary */}
+        <Route
+          path="/restaurants"
+          element={session ? <Restaurants /> : <Navigate to="/auth" replace />}
+        />
 
         {/* Catch-all redirect */}
         <Route
