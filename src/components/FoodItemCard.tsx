@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
+import { Link } from 'react-router-dom'
+import './FoodItemCard.css'
 
 export default function FoodItemCard({ id }: { id: number }) {
   const { session } = useAuth()
   const [loading, setLoading] = useState(true)
   const [name, setName] = useState('')
+  const [restaurantId, setRestaurantId] = useState()
   const [description, setDescription] = useState('')
   const [cost, setCost] = useState(0.0)
   const [photo_url, setPhoto] = useState('')
@@ -21,7 +24,7 @@ export default function FoodItemCard({ id }: { id: number }) {
 
       const { data, error, status } = await supabase
         .from('food_items')
-        .select('name, description, cost, photo_path')
+        .select('name, description, cost, photo_path, restaurant_id')
         .eq('id', id)
         .single()
 
@@ -31,75 +34,32 @@ export default function FoodItemCard({ id }: { id: number }) {
         setName(data.name)
         setDescription(data.description)
         setCost(data.cost)
+        setRestaurantId(data.restaurant_id)
         setPhoto(data.photo_path)
       }
     } catch (error) {
-      if (error instanceof Error) {
-        window.alert(error.message)
-      }
+      if (error instanceof Error) window.alert(error.message)
     } finally {
       setLoading(false)
     }
   }
 
+  if (loading) return <p className="food-item-loading">Loading ...</p>
+
   return (
-    <div style={styles.cardWrapper}>
-      {loading ? (
-        <p style={styles.loadingText}>Loading ...</p>
-      ) : (
-        <div style={styles.card}>
-          {photo_url && <img src={photo_url} style={styles.image} alt={name} />}
-          <div style={styles.info}>
-            <h3 style={styles.name}>{name}</h3>
-            <p style={styles.description}>{description}</p>
-            <p style={styles.cost}>${cost.toFixed(2)}</p>
-          </div>
+    <div className="food-item-card-wrapper">
+      <div className="food-item-card">
+        {photo_url && <img src={photo_url} alt={name} />}
+        <div className="food-item-info">
+          <h3>{name}</h3>
+          <p className="description">{description}</p>
+          <p className="cost">${cost.toFixed(2)}</p>
+          <Link 
+          to={`/restaurant/${restaurantId}/item/${id}`}
+          key = {id}
+          >Add to Cart</Link>
         </div>
-      )}
+      </div>
     </div>
   )
-}
-
-const styles: { [key: string]: React.CSSProperties } = {
-  cardWrapper: {
-    margin: '10px 0',
-    padding: '0 16px',
-  },
-  loadingText: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: '#666',
-    margin: '20px 0',
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    overflow: 'hidden',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-    marginBottom: 10,
-  },
-  image: {
-    width: '100%',
-    height: 200,
-    objectFit: 'cover',
-  },
-  info: {
-    padding: 12,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: 600,
-    marginBottom: 4,
-    color: '#1a1a1a',
-  },
-  description: {
-    fontSize: 14,
-    color: '#555',
-    marginBottom: 6,
-  },
-  cost: {
-    fontSize: 16,
-    fontWeight: 600,
-    color: '#111',
-  },
 }

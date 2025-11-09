@@ -1,0 +1,18 @@
+
+.menu-container {
+  display: inline-grid; /* make grid behave like inline content */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.menu-container h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.menu-wrapper {
+  display: flex;
+  justify-content: center; /* centers the inline-grid */
+  width: 100%;
+}
