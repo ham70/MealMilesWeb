@@ -76,7 +76,6 @@ export default function UserRestaurants() {
 
               <h3>{r.name ?? '(Unnamed restaurant)'}</h3>
               <p>{r.address ?? 'No address set'}</p>
-              <small>Admin: {r.admin_id}</small>
             </article>
           ))}
         </div>
