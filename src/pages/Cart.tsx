@@ -183,7 +183,9 @@ export default function Cart() {
 
   return (
     <div className="cart-page">
-      <Link to={`/restaurant/${restaurantId}`}>← Back</Link>
+      {cart.length > 0 && restaurantId && (
+        <Link to={`/restaurant/${restaurantId}`}>← Back</Link>
+      )}
       <h2>{restaurantName || 'Your Cart'}</h2>
 
       {cart.length === 0 ? (
