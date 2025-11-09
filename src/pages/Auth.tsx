@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
+import './Auth.css'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -25,63 +26,53 @@ export default function Auth() {
       password,
     })
 
-    if (error) {
-      alert(error.message)
-    }
+    if (error) alert(error.message)
     setLoading(false)
   }
 
   async function signUpWithEmail() {
     setLoading(true)
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    })
-
-    if (error) {
-      alert(error.message)
-    } else {
-      alert('Please check your inbox for email verification!')
-    }
+    const { error } = await supabase.auth.signUp({ email, password })
+    if (error) alert(error.message)
+    else alert('Please check your inbox for email verification!')
     setLoading(false)
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: '50px auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
-      <h2>Auth</h2>
-      <div style={{ marginBottom: 16 }}>
+    <div className="auth-card">
+      <h2>Sign In / Sign Up</h2>
+
+      <div className="form-group">
         <label>Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="email@address.com"
-          style={{ width: '100%', padding: 8, marginTop: 4 }}
         />
       </div>
 
-      <div style={{ marginBottom: 16 }}>
+      <div className="form-group">
         <label>Password</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          style={{ width: '100%', padding: 8, marginTop: 4 }}
         />
       </div>
 
-      <div style={{ display: 'flex', gap: 8 }}>
-        <button onClick={signInWithEmail} disabled={loading} style={{ flex: 1, padding: 10 }}>
+      <div className="button-row">
+        <button onClick={signInWithEmail} disabled={loading} className="primary">
           {loading ? 'Loading...' : 'Sign in'}
         </button>
-        <button onClick={signUpWithEmail} disabled={loading} style={{ flex: 1, padding: 10 }}>
+        <button onClick={signUpWithEmail} disabled={loading} className="secondary">
           {loading ? 'Loading...' : 'Sign up'}
         </button>
       </div>
 
       {session && (
-        <div style={{ marginTop: 20 }}>
+        <div className="session-info">
           <strong>Logged in as:</strong> {session.user?.email}
         </div>
       )}

@@ -1,33 +1,30 @@
-/* =========================
-   Account Component Styles
-========================= */
-
+/* Account.css */
 .account-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; /* so it works within #root layout */
-  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  padding: 20px;
 }
 
 .account-card {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  padding: 2.5rem 3rem;
+  padding: 30px 40px;
   width: 100%;
   max-width: 450px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .account-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .account-title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
   color: #333;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -35,22 +32,22 @@
 .account-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .account-field label {
-  margin-bottom: 0.5rem;
+  margin-bottom: 6px;
   font-weight: 600;
   color: #555;
 }
 
 .account-field input {
-  padding: 0.75rem 1rem;
+  padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 16px;
+  transition: border-color 0.2s;
 }
 
 .account-field input:focus {
@@ -62,20 +59,20 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 2rem;
+  margin-bottom: 25px;
   font-weight: 500;
   color: #555;
 }
 
 .account-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 15px;
   flex-wrap: wrap;
 }
 
 .account-buttons button {
   flex: 1;
-  padding: 0.75rem 1rem;
+  padding: 12px;
   border: none;
   border-radius: 8px;
   font-weight: 600;

@@ -14,7 +14,6 @@ export default function Home() {
 
   return (
     <div style={{ maxWidth: 500, margin: '50px auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
-      <h2>Hot Restaurants</h2>
       <RestaurantList/>
     </div>
   )
