@@ -15,7 +15,6 @@ export default function AppRoutes() {
 
   return (
     <BrowserRouter>
-    <Link to="/cart">Cart</Link>
       <Routes>
         {/* Public route */}
         <Route

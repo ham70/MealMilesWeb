@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import { useCart } from '../contexts/CartContext'
 import BottomNav from '../components/BottomNav'
+import { Link } from 'react-router-dom'
 
 interface FoodItem {
   id: number
@@ -50,13 +51,16 @@ export default function RestaurantItem() {
         price: item.cost,
         quantity,
         photo_url: item.photo_path,
-      })
+
+      }, restaurantId)
     }
   }
 
   if (loading || !item) return <p className="text-center mt-8">Loading item...</p>
 
   return (
+    <div>
+      <Link to={`/restaurant/${restaurantId}`}>back</Link>
     <div className="max-w-md mx-auto mt-12 bg-white rounded-2xl shadow-md overflow-hidden">
       {item.photo_path && (
         <img src={item.photo_path} alt={item.name} className="w-full h-64 object-cover" />
@@ -91,6 +95,7 @@ export default function RestaurantItem() {
         </button>
       </div>
       <BottomNav/>
+    </div>
     </div>
   )
 }

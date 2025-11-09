@@ -1,4 +1,3 @@
-// src/contexts/CartContext.tsx
 import { createContext, useContext, useState, ReactNode } from 'react'
 
 export interface CartItem {
@@ -11,7 +10,8 @@ export interface CartItem {
 
 interface CartContextType {
   cart: CartItem[]
-  addToCart: (item: CartItem) => void
+  restaurantId: number | null
+  addToCart: (item: CartItem, itemRestaurantId: number) => void
   removeFromCart: (id: number) => void
   clearCart: () => void
 }
@@ -26,9 +26,24 @@ export function useCart() {
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
+  const [restaurantId, setRestaurantId] = useState<number | null>(null)
 
-  function addToCart(item: CartItem) {
+  function addToCart(item: CartItem, itemRestaurantId: number) {
     setCart((prev) => {
+      if (prev.length === 0) {
+        setRestaurantId(itemRestaurantId)
+      } else if (restaurantId !== itemRestaurantId) {
+        if (
+          !window.confirm(
+            'You already have items from another restaurant. Clear cart and add this item?'
+          )
+        ) {
+          return prev
+        }
+        setRestaurantId(itemRestaurantId)
+        return [item] // start new cart
+      }
+
       const existing = prev.find((i) => i.id === item.id)
       if (existing) {
         return prev.map((i) =>
@@ -42,14 +57,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   function removeFromCart(id: number) {
     setCart((prev) => prev.filter((i) => i.id !== id))
+    if (cart.length === 1) setRestaurantId(null) // clear restaurantId if cart becomes empty
   }
 
   function clearCart() {
     setCart([])
+    setRestaurantId(null)
   }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, restaurantId, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   )

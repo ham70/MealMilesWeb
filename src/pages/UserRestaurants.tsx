@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import RestaurantForm from '../components/RestaurantForm'
+import BottomNav from '../components/BottomNav'
 
 interface RestaurantData {
   id: string            // uuid in Supabase
@@ -108,6 +109,7 @@ export default function UserRestaurants() {
       )}
       <h2>Nice Form</h2>
       <RestaurantForm onCreated ={retrieveRestaurants}/>
+      <BottomNav/>
     </div>
   )
 }

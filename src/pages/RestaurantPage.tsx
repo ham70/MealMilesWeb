@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext'
 import Menu from '../components/Menu'
 import './RestaurantPage.css'
 import BottomNav from '../components/BottomNav'
+import { Link } from 'react-router-dom'
 
 type RestaurantType = {
   id: number
@@ -60,7 +61,7 @@ export default function RestaurantPage() {
 
   return (
     <div className="restaurant-page">
-      {/* Hero Header */}
+      <Link to="/cart">Cart</Link>
       <div className="restaurant-hero">
         <img
           src={restaurant.photo_url || '/placeholder.jpg'}

@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import RestaurantList from '../components/RestaurantList'
 import BottomNav from '../components/BottomNav'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
   const { session, signOut } = useAuth()

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
+import { Link } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
 
 export default function Account() {
@@ -117,6 +118,11 @@ export default function Account() {
         <button onClick={signOut} className="secondary">
           Sign Out
         </button>
+      </div>
+      <div>
+        {isRestaurant &&
+          <Link to="/restaurants">View Your Restaurants</Link>
+        }
       </div>
       <BottomNav/>
     </div>
