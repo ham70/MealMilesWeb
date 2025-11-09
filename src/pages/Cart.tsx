@@ -7,12 +7,13 @@ import { useAuth } from '../contexts/AuthContext'
 import './Cart.css'
 
 export default function Cart() {
-  const { cart, restaurantId } = useCart()
+  const { cart, restaurantId, clearCart } = useCart()
   const { session } = useAuth()
 
   const [restaurantPoints, setRestaurantPoints] = useState(0)
   const [subtotal, setSubtotal] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [restaurantName, setRestaurantName] = useState('')
 
   // Compute subtotal whenever cart changes
@@ -106,6 +107,80 @@ export default function Cart() {
     }
   }
 
+  async function handleCheckout() {
+    if (!session?.user?.id || !restaurantId || cart.length === 0) {
+      alert('Cannot checkout: missing information or empty cart')
+      return
+    }
+
+    try {
+      setCheckoutLoading(true)
+
+      const restId =
+        typeof restaurantId === 'string' ? Number(restaurantId) : restaurantId
+      if (restId == null || Number.isNaN(restId as number)) {
+        alert('Invalid restaurant ID')
+        return
+      }
+
+      const userId = session.user.id
+      const pointsToAdd = Math.floor(totalAfterDiscount * 100)
+
+      if (pointsToAdd <= 0) {
+        alert('Cannot checkout: total must be greater than $0')
+        return
+      }
+
+      // Check if a row exists for this user and restaurant
+      const { data: existingData, error: fetchError } = await supabase
+        .from('user_points')
+        .select('id, point')
+        .eq('restaurant_id', restId)
+        .eq('user_id', userId)
+        .maybeSingle()
+
+      if (fetchError && fetchError.code !== 'PGRST116') {
+        // PGRST116 is "not found" which is fine
+        throw fetchError
+      }
+
+      const currentPoints = existingData?.point ?? 0
+      const newPointsTotal = currentPoints + pointsToAdd
+
+      if (existingData) {
+        // Update existing row
+        const { error: updateError } = await supabase
+          .from('user_points')
+          .update({ point: newPointsTotal })
+          .eq('id', existingData.id)
+
+        if (updateError) throw updateError
+      } else {
+        // Insert new row
+        const { error: insertError } = await supabase
+          .from('user_points')
+          .insert({
+            user_id: userId,
+            restaurant_id: restId,
+            point: newPointsTotal,
+          })
+
+        if (insertError) throw insertError
+      }
+
+      // Clear cart and refresh points
+      clearCart()
+      await retrieveRestaurantPoints()
+
+      alert(`Checkout successful! You earned ${pointsToAdd.toLocaleString()} points!`)
+    } catch (err) {
+      console.error('Checkout error:', err)
+      alert(err instanceof Error ? err.message : 'Failed to checkout')
+    } finally {
+      setCheckoutLoading(false)
+    }
+  }
+
   return (
     <div className="cart-page">
       <Link to={`/restaurant/${restaurantId}`}>← Back</Link>
@@ -153,6 +228,14 @@ export default function Cart() {
               </div>
             )}
           </div>
+
+          <button
+            onClick={handleCheckout}
+            disabled={checkoutLoading || cart.length === 0 || totalAfterDiscount <= 0}
+            className="checkout-button"
+          >
+            {checkoutLoading ? 'Processing...' : 'Checkout'}
+          </button>
         </div>
       )}
 
