@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
+import BottomNav from '../components/BottomNav'
 
 export default function Account() {
   const { session, signOut } = useAuth()
@@ -117,6 +118,7 @@ export default function Account() {
           Sign Out
         </button>
       </div>
+      <BottomNav/>
     </div>
   )
 }

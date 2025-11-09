@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import { useCart } from '../contexts/CartContext'
+import BottomNav from '../components/BottomNav'
 
 interface FoodItem {
   id: number
@@ -89,6 +90,7 @@ export default function RestaurantItem() {
           Add {quantity} to Cart
         </button>
       </div>
+      <BottomNav/>
     </div>
   )
 }

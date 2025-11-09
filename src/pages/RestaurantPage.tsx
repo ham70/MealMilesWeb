@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import Menu from '../components/Menu'
 import './RestaurantPage.css'
+import BottomNav from '../components/BottomNav'
 
 type RestaurantType = {
   id: number
@@ -78,6 +79,7 @@ export default function RestaurantPage() {
           <Menu id={restaurant.id} />
         </div>
       </div>
+      <BottomNav/>
     </div>
   )
 }

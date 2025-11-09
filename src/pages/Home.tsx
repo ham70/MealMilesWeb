@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import RestaurantList from '../components/RestaurantList'
+import BottomNav from '../components/BottomNav'
 
 export default function Home() {
   const { session, signOut } = useAuth()
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <div style={{ maxWidth: 500, margin: '50px auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
       <RestaurantList/>
+      <BottomNav/>
     </div>
   )
 }
