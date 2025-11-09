@@ -7,6 +7,7 @@ import RestaurantPage from './pages/RestaurantPage'
 import RestaurantItem from './pages/RestaurantItem'
 import Cart from './pages/Cart'
 import Restaurants from './pages/UserRestaurants'
+import RestaurantFoodItems from './pages/RestaurantFoodItems'
 import './App.css'
 
 export default function AppRoutes() {
@@ -32,6 +33,10 @@ export default function AppRoutes() {
         <Route
           path="/restaurants"
           element={session ? <Restaurants /> : <Navigate to="/auth" replace />}
+        />
+        <Route
+          path="/restaurants/:id/food-items"
+          element={session ? <RestaurantFoodItems /> : <Navigate to="/auth" replace />}
         />
         <Route
           path="/home"

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import RestaurantForm from '../components/RestaurantForm'
 import BottomNav from '../components/BottomNav'
+import { Link } from 'react-router-dom'
 import './UserRestaurants.css'
 
 interface RestaurantData {
@@ -76,6 +77,9 @@ export default function UserRestaurants() {
 
               <h3>{r.name ?? '(Unnamed restaurant)'}</h3>
               <p>{r.address ?? 'No address set'}</p>
+              <Link to={`/restaurants/${r.id}/food-items`} className="manage-food-items-btn">
+                Manage Food Items
+              </Link>
             </article>
           ))}
         </div>
