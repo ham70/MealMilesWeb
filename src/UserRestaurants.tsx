@@ -107,7 +107,7 @@ export default function UserRestaurants() {
         </div>
       )}
       <h2>Nice Form</h2>
-      <RestaurantForm/>
+      <RestaurantForm onCreated ={retrieveRestaurants}/>
     </div>
   )
 }

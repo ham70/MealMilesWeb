@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { supabase } from './supabaseClient'
 import { useAuth } from './contexts/AuthContext'
 
-export default function NewRestaurantForm() {
+type Props = {onCreated?:() => void}
+
+export default function NewRestaurantForm({ onCreated }: Props) {
   const { session } = useAuth()
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
@@ -30,6 +32,8 @@ export default function NewRestaurantForm() {
       setName('')
       setAddress('')
       setPhotoUrl('')
+
+      onCreated?.()
 
       alert('Restaurant created!')
     } catch (err) {
