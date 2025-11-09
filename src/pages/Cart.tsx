@@ -124,9 +124,10 @@ export default function Cart() {
       }
 
       const userId = session.user.id
-      const pointsToAdd = Math.floor(totalAfterDiscount * 100)
+      const pointsEarned = Math.floor(totalAfterDiscount * 100)
+      const pointsUsed = pointsDiscount * 1000 // Points used for discount
 
-      if (pointsToAdd <= 0) {
+      if (pointsEarned <= 0) {
         alert('Cannot checkout: total must be greater than $0')
         return
       }
@@ -145,7 +146,8 @@ export default function Cart() {
       }
 
       const currentPoints = existingData?.point ?? 0
-      const newPointsTotal = currentPoints + pointsToAdd
+      // Deduct points used for discount, then add points earned
+      const newPointsTotal = currentPoints - pointsUsed + pointsEarned
 
       if (existingData) {
         // Update existing row
@@ -172,7 +174,10 @@ export default function Cart() {
       clearCart()
       await retrieveRestaurantPoints()
 
-      alert(`Checkout successful! You earned ${pointsToAdd.toLocaleString()} points!`)
+      const pointsMessage = pointsUsed > 0 
+        ? `Checkout successful! You used ${pointsUsed.toLocaleString()} points and earned ${pointsEarned.toLocaleString()} points!`
+        : `Checkout successful! You earned ${pointsEarned.toLocaleString()} points!`
+      alert(pointsMessage)
     } catch (err) {
       console.error('Checkout error:', err)
       alert(err instanceof Error ? err.message : 'Failed to checkout')
