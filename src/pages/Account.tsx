@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
-import { useAuth } from './contexts/AuthContext'
+import { supabase } from '../supabaseClient'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Account() {
   const { session, signOut } = useAuth()
