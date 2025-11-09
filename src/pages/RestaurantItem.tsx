@@ -53,7 +53,7 @@ export default function RestaurantItem() {
         quantity,
         photo_url: item.photo_path,
 
-      }, restaurantId)
+      }, Number(restaurantId))
     }
   }
 
