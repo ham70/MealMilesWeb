@@ -2,6 +2,7 @@ import { useCart } from '../contexts/CartContext'
 import { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import BottomNav from '../components/BottomNav'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
   const { cart, restaurantId } = useCart()
@@ -47,6 +48,7 @@ export default function Cart() {
 
   return (
     <div className="cart-page" style={{ maxWidth: 600, margin: '80px auto 100px', padding: 16 }}>
+      <Link to={`/restaurant/${restaurantId}`}>Back</Link>
       <h2>{restaurantName || 'Your Cart'}</h2>
 
       {cart.length === 0 ? (
