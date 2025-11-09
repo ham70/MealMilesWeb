@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
-import { useAuth } from './contexts/AuthContext'
-import RestaurantForm from './RestaurantForm'
+import { supabase } from '../supabaseClient'
+import { useAuth } from '../contexts/AuthContext'
+import RestaurantForm from '../components/RestaurantForm'
 
 interface RestaurantData {
   id: string            // uuid in Supabase

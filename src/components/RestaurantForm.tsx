@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { supabase } from './supabaseClient'
-import { useAuth } from './contexts/AuthContext'
+import { supabase } from '../supabaseClient'
+import { useAuth } from '../contexts/AuthContext'
 
 type Props = {onCreated?:() => void}
 

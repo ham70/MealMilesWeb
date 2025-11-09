@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import RestaurantPage from './pages/RestaurantPage'
 import RestaurantItem from './pages/RestaurantItem'
 import Cart from './pages/Cart'
-import Restaurants from './UserRestaurants'
+import Restaurants from './pages/UserRestaurants'
 
 export default function AppRoutes() {
   const { session, loading } = useAuth()
