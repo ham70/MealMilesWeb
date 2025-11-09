@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { supabase } from '../supabaseClient'
+import { useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import RestaurantList from '../components/RestaurantList'
 import BottomNav from '../components/BottomNav'
-import { Link } from 'react-router-dom'
 
 export default function Home() {
-  const { session, signOut } = useAuth()
+  const { session } = useAuth()
 
   useEffect(() => {
     console.log(session)

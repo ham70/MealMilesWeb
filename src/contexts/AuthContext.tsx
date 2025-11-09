@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
-
+import type { ReactNode } from 'react'
 interface AuthContextType {
   session: any
   loading: boolean

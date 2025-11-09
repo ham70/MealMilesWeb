@@ -21,7 +21,6 @@ export default function RestaurantItem() {
   const [item, setItem] = useState<FoodItem | null>(null)
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (itemId) fetchItem()
