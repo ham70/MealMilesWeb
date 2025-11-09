@@ -1,0 +1,82 @@
+.restaurant-form {
+  display: grid;
+  gap: 20px;
+  max-width: 500px;
+  padding: 32px;
+  background: linear-gradient(145deg, var(--food-white), var(--food-cream));
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.1);
+  animation: fadeInScale 0.5s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.restaurant-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--food-text);
+  font-size: 14px;
+}
+
+.restaurant-form input {
+  padding: 14px 16px;
+  border: 2px solid var(--food-gray);
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  background: var(--food-white);
+  color: var(--food-text);
+  transition: all var(--transition-fast);
+  will-change: border-color, box-shadow;
+  font-family: inherit;
+}
+
+.restaurant-form input:focus {
+  border-color: var(--food-orange);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+.restaurant-form button {
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  color: var(--food-white);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+  transition: all var(--transition-fast);
+  will-change: transform, box-shadow;
+  margin-top: 8px;
+}
+
+.restaurant-form button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--food-orange-light), var(--food-orange));
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+}
+
+.restaurant-form button:disabled {
+  background: var(--food-gray);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.restaurant-form button:active:not(:disabled) {
+  transform: translateY(0);
+}
+

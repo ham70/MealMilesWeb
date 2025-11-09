@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
+import './RestaurantForm.css'
 
 type Props = {onCreated?:() => void}
 
@@ -44,7 +45,7 @@ export default function NewRestaurantForm({ onCreated }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 12, maxWidth: 420 }}>
+    <form onSubmit={handleSubmit} className="restaurant-form">
       <label>
         Name
         <input value={name} onChange={e => setName(e.target.value)} required />
@@ -58,7 +59,7 @@ export default function NewRestaurantForm({ onCreated }: Props) {
         <input type="url" value={photoUrl} onChange={e => setPhotoUrl(e.target.value)} />
       </label>
       <button type="submit" disabled={loading}>
-        {loading ? 'Saving…' : 'Create'}
+        {loading ? 'Saving…' : 'Create Restaurant'}
       </button>
     </form>
   )

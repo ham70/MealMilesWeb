@@ -1,104 +1,188 @@
 /* Account.css */
+.account-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--food-cream) 0%, var(--food-cream-dark) 100%);
+  padding: 40px 20px 120px;
+  animation: fadeIn 0.4s ease-in-out;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .account-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  background: linear-gradient(135deg, var(--food-cream) 0%, var(--food-cream-dark) 100%);
   padding: 20px;
 }
 
 .account-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  padding: 30px 40px;
+  background: linear-gradient(145deg, var(--food-white), var(--food-cream));
+  border-radius: 28px;
+  box-shadow: 0 12px 48px rgba(255, 107, 53, 0.2), 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 48px 40px;
   width: 100%;
-  max-width: 450px;
-  transition: transform 0.2s ease;
+  max-width: 500px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  will-change: transform, box-shadow;
+  border: 1px solid rgba(255, 107, 53, 0.1);
+  animation: fadeInScale 0.5s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .account-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 56px rgba(255, 107, 53, 0.25), 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .account-title {
   text-align: center;
-  margin-bottom: 30px;
-  color: #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 32px;
+  color: var(--food-text);
+  font-family: inherit;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .account-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .account-field label {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 600;
-  color: #555;
+  color: var(--food-text);
+  font-size: 14px;
 }
 
 .account-field input {
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 14px 16px;
+  border: 2px solid var(--food-gray);
+  border-radius: 12px;
   outline: none;
-  font-size: 16px;
-  transition: border-color 0.2s;
+  font-size: 15px;
+  background: var(--food-white);
+  color: var(--food-text);
+  transition: all var(--transition-fast);
+  will-change: border-color, box-shadow;
 }
 
 .account-field input:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+  border-color: var(--food-orange);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+.account-field input:disabled {
+  background: var(--food-gray-light);
+  cursor: not-allowed;
 }
 
 .account-checkbox {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 25px;
-  font-weight: 500;
-  color: #555;
+  gap: 12px;
+  margin-bottom: 32px;
+  font-weight: 600;
+  color: var(--food-text);
+  font-size: 15px;
 }
 
 .account-buttons {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .account-buttons button {
   flex: 1;
-  padding: 12px;
+  padding: 14px 24px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: all var(--transition-fast);
+  will-change: transform, box-shadow;
+  font-size: 16px;
 }
 
 .account-buttons button:disabled {
-  background: #aaa;
+  background: var(--food-gray);
   cursor: not-allowed;
+  transform: none;
 }
 
 .account-buttons button:first-child {
-  background: #6c63ff;
-  color: white;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  color: var(--food-white);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
 }
 
 .account-buttons button:first-child:hover:not(:disabled) {
-  background: #5848c2;
+  background: linear-gradient(135deg, var(--food-orange-light), var(--food-orange));
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
 }
 
 .account-buttons button:last-child {
-  background: #e0e0e0;
-  color: #333;
+  background: var(--food-white);
+  border: 2px solid var(--food-gray);
+  color: var(--food-text);
 }
 
 .account-buttons button:last-child:hover {
-  background: #cacaca;
+  background: var(--food-gray-light);
+  border-color: var(--food-orange-light);
+  color: var(--food-orange);
+  transform: translateY(-2px);
+}
+
+.account-card > div:last-child {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.account-card > div:last-child a {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--food-green), var(--food-green-dark));
+  color: var(--food-white);
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.3);
+}
+
+.account-card > div:last-child a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 124, 89, 0.4);
 }

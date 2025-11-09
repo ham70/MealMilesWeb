@@ -5,6 +5,7 @@ import { supabase } from '../supabaseClient'
 import { useCart } from '../contexts/CartContext'
 import BottomNav from '../components/BottomNav'
 import { Link } from 'react-router-dom'
+import './RestaurantItem.css'
 
 interface FoodItem {
   id: number
@@ -56,46 +57,45 @@ export default function RestaurantItem() {
     }
   }
 
-  if (loading || !item) return <p className="text-center mt-8">Loading item...</p>
+  if (loading || !item) return <p className="loading-item">Loading item...</p>
 
   return (
-    <div>
-      <Link to={`/restaurant/${restaurantId}`}>back</Link>
-    <div className="max-w-md mx-auto mt-12 bg-white rounded-2xl shadow-md overflow-hidden">
-      {item.photo_path && (
-        <img src={item.photo_path} alt={item.name} className="w-full h-64 object-cover" />
-      )}
-      <div className="p-6 flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">{item.name}</h2>
-        <p className="text-gray-700">{item.description}</p>
-        <p className="text-lg font-semibold">${item.cost.toFixed(2)}</p>
+    <div className="restaurant-item-page">
+      <Link to="/cart" className="cart-button-top">🛒 Cart</Link>
+      <Link to={`/restaurant/${restaurantId}`}>← Back</Link>
+      <div className="restaurant-item-card">
+        {item.photo_path && (
+          <img src={item.photo_path} alt={item.name} />
+        )}
+        <div className="restaurant-item-content">
+          <h2>{item.name}</h2>
+          <p className="description">{item.description}</p>
+          <p className="price">${item.cost.toFixed(2)}</p>
 
-        {/* Quantity Selector */}
-        <div className="flex items-center gap-4">
+          {/* Quantity Selector */}
+          <div className="quantity-selector">
+            <button
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+            >
+              −
+            </button>
+            <span>{quantity}</span>
+            <button
+              onClick={() => setQuantity((q) => q + 1)}
+            >
+              +
+            </button>
+          </div>
+
           <button
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="px-3 py-1 bg-gray-200 rounded-lg font-bold text-lg"
+            onClick={handleAddToCart}
+            className="add-to-cart-button"
           >
-            -
-          </button>
-          <span className="text-lg">{quantity}</span>
-          <button
-            onClick={() => setQuantity((q) => q + 1)}
-            className="px-3 py-1 bg-gray-200 rounded-lg font-bold text-lg"
-          >
-            +
+            Add {quantity} to Cart
           </button>
         </div>
-
-        <button
-          onClick={handleAddToCart}
-          className="mt-4 w-full py-3 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-semibold rounded-xl shadow hover:from-indigo-700 hover:to-indigo-600 transition"
-        >
-          Add {quantity} to Cart
-        </button>
       </div>
       <BottomNav/>
-    </div>
     </div>
   )
 }

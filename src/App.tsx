@@ -7,11 +7,12 @@ import RestaurantPage from './pages/RestaurantPage'
 import RestaurantItem from './pages/RestaurantItem'
 import Cart from './pages/Cart'
 import Restaurants from './pages/UserRestaurants'
+import './App.css'
 
 export default function AppRoutes() {
   const { session, loading } = useAuth()
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div className="app-loading">Loading...</div>
 
   return (
     <BrowserRouter>

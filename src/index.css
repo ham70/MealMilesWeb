@@ -1,141 +1,228 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Food-themed color palette */
+  --food-orange: #FF6B35;
+  --food-orange-light: #FF8C5A;
+  --food-orange-dark: #E55A2B;
+  --food-red: #E63946;
+  --food-red-light: #FF6B7A;
+  --food-yellow: #FFB627;
+  --food-yellow-light: #FFC947;
+  --food-brown: #8B4513;
+  --food-brown-light: #A0522D;
+  --food-cream: #FFF8F0;
+  --food-cream-dark: #FFF5E6;
+  --food-green: #4A7C59;
+  --food-green-dark: #2D5016;
+  --food-white: #FFFFFF;
+  --food-gray-light: #F5F5F5;
+  --food-gray: #E0E0E0;
+  --food-gray-dark: #757575;
+  --food-text: #2C2C2C;
+  --food-text-light: #666666;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  color: var(--food-text);
+  background: linear-gradient(135deg, var(--food-cream) 0%, var(--food-cream-dark) 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Smooth transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--food-orange);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 a:hover {
-  color: #535bf2;
+  color: var(--food-orange-dark);
 }
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center; /* horizontal centering */
-  align-items: center;     /* vertical centering */
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, var(--food-cream) 0%, var(--food-cream-dark) 100%);
 }
 
-h1, h2 {
-  font-weight: 600;
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
   margin: 0 0 1rem 0;
+  color: var(--food-text);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  border: none;
+  padding: 0.75em 1.5em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all var(--transition-fast);
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 button:hover {
-  border-color: #646cff;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 3px solid var(--food-orange-light);
+  outline-offset: 2px;
 }
 
 /* Card container */
 .card {
   width: 100%;
   max-width: 480px;
-  padding: 32px;
-  border-radius: 16px;
-  background: linear-gradient(145deg, #1f1f1f, #2a2a2a);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  color: #fff;
+  padding: 40px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, var(--food-white), var(--food-cream));
+  box-shadow: 0 10px 40px rgba(255, 107, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--food-text);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  will-change: transform, box-shadow;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(255, 107, 53, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Form elements */
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="password"],
+input[type="url"] {
   width: 100%;
-  padding: 10px 12px;
-  margin-top: 6px;
-  border-radius: 10px;
-  border: 1px solid #444;
-  background-color: #2a2a2a;
-  color: #fff;
+  padding: 14px 16px;
+  margin-top: 8px;
+  border-radius: 12px;
+  border: 2px solid var(--food-gray);
+  background-color: var(--food-white);
+  color: var(--food-text);
   font-size: 15px;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: all var(--transition-fast);
+  will-change: border-color, box-shadow;
 }
 
 input[type="text"]:focus,
-input[type="email"]:focus {
-  border-color: #6366f1;
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="url"]:focus {
+  border-color: var(--food-orange);
   outline: none;
-  background-color: #333;
+  background-color: var(--food-white);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
 }
 
 label {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
+  color: var(--food-text);
+  display: block;
+  margin-bottom: 4px;
 }
 
 input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #6366f1;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--food-orange);
   cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+input[type="checkbox"]:hover {
+  transform: scale(1.1);
 }
 
 /* Buttons inside the card */
 .card button.primary {
   flex: 1;
-  background: linear-gradient(90deg, #6366f1, #4f46e5);
-  color: #fff;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  color: var(--food-white);
   font-weight: 600;
-  font-size: 15px;
-  box-shadow: 0 3px 10px rgba(99,102,241,0.3);
+  font-size: 16px;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+  padding: 14px 24px;
+}
+
+.card button.primary:hover {
+  background: linear-gradient(135deg, var(--food-orange-light), var(--food-orange));
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
 }
 
 .card button.primary:disabled {
-  background: #555;
+  background: var(--food-gray);
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .card button.secondary {
   flex: 1;
-  border: 1px solid #555;
-  background: #1f1f1f;
-  color: #fff;
+  border: 2px solid var(--food-gray);
+  background: var(--food-white);
+  color: var(--food-text);
+  padding: 14px 24px;
 }
 
 .card button.secondary:hover {
-  background: #2a2a2a;
+  background: var(--food-gray-light);
+  border-color: var(--food-orange-light);
+  color: var(--food-orange);
 }
 
 /* Form spacing */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .form-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
@@ -143,4 +230,5 @@ input[type="checkbox"] {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 8px;
 }

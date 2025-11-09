@@ -15,7 +15,7 @@ export default function Home() {
   if (!session) return <div>Please log in to view your account.</div>
 
   return (
-    <div style={{ maxWidth: 500, margin: '50px auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
+    <div style={{ maxWidth: '100%', margin: '0 auto', padding: '2rem', paddingBottom: '100px' }}>
       <RestaurantList/>
       <BottomNav/>
     </div>

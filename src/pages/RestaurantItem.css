@@ -1,0 +1,211 @@
+.restaurant-item-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--food-cream) 0%, var(--food-cream-dark) 100%);
+  padding: 2rem;
+  padding-bottom: 120px;
+  animation: fadeIn 0.4s ease-in-out;
+  position: relative;
+}
+
+.cart-button-top {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  color: var(--food-white);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+  transition: all var(--transition-fast);
+  will-change: transform, box-shadow;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.cart-button-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  background: linear-gradient(135deg, var(--food-orange-light), var(--food-orange));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.restaurant-item-page > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 10px 20px;
+  background: var(--food-gray-light);
+  border-radius: 12px;
+  color: var(--food-text);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  will-change: transform;
+}
+
+.restaurant-item-page > a:hover {
+  background: var(--food-orange);
+  color: var(--food-white);
+  transform: translateX(-4px);
+}
+
+.restaurant-item-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, var(--food-white), var(--food-cream));
+  border-radius: 28px;
+  box-shadow: 0 12px 48px rgba(255, 107, 53, 0.2), 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid rgba(255, 107, 53, 0.1);
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.restaurant-item-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow);
+  will-change: transform;
+}
+
+.restaurant-item-card:hover img {
+  transform: scale(1.05);
+}
+
+.restaurant-item-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.restaurant-item-content h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--food-text);
+  margin: 0;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.restaurant-item-content p.description {
+  font-size: 1.1rem;
+  color: var(--food-text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.restaurant-item-content p.price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--food-orange);
+  margin: 0;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  background: var(--food-gray-light);
+  border-radius: 16px;
+  justify-content: center;
+}
+
+.quantity-selector button {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--food-white);
+  border: 2px solid var(--food-gray);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--food-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  will-change: transform, background-color;
+}
+
+.quantity-selector button:hover {
+  background: var(--food-orange);
+  border-color: var(--food-orange);
+  color: var(--food-white);
+  transform: scale(1.1);
+}
+
+.quantity-selector button:active {
+  transform: scale(0.95);
+}
+
+.quantity-selector span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--food-text);
+  min-width: 40px;
+  text-align: center;
+}
+
+.add-to-cart-button {
+  width: 100%;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  color: var(--food-white);
+  border: none;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  transition: all var(--transition-fast);
+  will-change: transform, box-shadow;
+  margin-top: 8px;
+}
+
+.add-to-cart-button:hover {
+  background: linear-gradient(135deg, var(--food-orange-light), var(--food-orange));
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+}
+
+.add-to-cart-button:active {
+  transform: translateY(0);
+}
+
+.loading-item {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 1.2rem;
+  color: var(--food-text-light);
+  font-weight: 500;
+}
+

@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient'
 import BottomNav from '../components/BottomNav'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import './Cart.css'
 
 export default function Cart() {
   const { cart, restaurantId } = useCart()
@@ -19,6 +20,10 @@ export default function Cart() {
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     setSubtotal(total)
   }, [cart])
+
+  // Calculate points discount (1000 points = $1)
+  const pointsDiscount = Math.floor(restaurantPoints / 1000)
+  const totalAfterDiscount = Math.max(0, subtotal - pointsDiscount)
 
   // Fetch restaurant name whenever restaurantId changes
   useEffect(() => {
@@ -102,50 +107,56 @@ export default function Cart() {
   }
 
   return (
-    <div className="cart-page" style={{ maxWidth: 600, margin: '80px auto 100px', padding: 16 }}>
-      <Link to={`/restaurant/${restaurantId}`}>Back</Link>
+    <div className="cart-page">
+      <Link to={`/restaurant/${restaurantId}`}>← Back</Link>
       <h2>{restaurantName || 'Your Cart'}</h2>
 
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <div>
-          {cart.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                padding: '8px 0',
-                borderBottom: '1px solid #eee',
-              }}
-            >
-              <span>
-                {item.name} x {item.quantity}
-              </span>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
+          <div className="cart-items">
+            {cart.map((item) => (
+              <div key={item.id} className="cart-item">
+                <span className="cart-item-name">
+                  {item.name} × {item.quantity}
+                </span>
+                <span className="cart-item-price">${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="cart-summary">
+            <div className="cart-summary-row">
+              <span className="cart-summary-label">Subtotal</span>
+              <span className="cart-summary-value">${subtotal.toFixed(2)}</span>
             </div>
-          ))}
-
-          <div
-            style={{
-              marginTop: 16,
-              fontWeight: 'bold',
-              display: 'grid',
-              gridTemplateColumns: '1fr auto',
-              rowGap: 6,
-            }}
-          >
-            <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
-
-            <span>Points</span>
-            <span>{restaurantPoints}</span>
+            <div className="cart-summary-row">
+              <span className="cart-summary-label">Points Available</span>
+              <span className="cart-summary-value">{restaurantPoints.toLocaleString()}</span>
+            </div>
+            {pointsDiscount > 0 && (
+              <div className="cart-summary-row points-discount">
+                <span className="cart-summary-label">
+                  Points Discount ({pointsDiscount * 1000} pts = ${pointsDiscount.toFixed(2)})
+                </span>
+                <span className="cart-summary-value discount">-${pointsDiscount.toFixed(2)}</span>
+              </div>
+            )}
+            <div className="cart-summary-row total-row">
+              <span className="cart-summary-label">Total</span>
+              <span className="cart-summary-value total">${totalAfterDiscount.toFixed(2)}</span>
+            </div>
+            {restaurantPoints >= 1000 && (
+              <div className="points-info">
+                <small>💡 1000 points = $1.00 discount</small>
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {loading && <div style={{ marginTop: 8, fontSize: 12, color: '#666' }}>Loading…</div>}
+      {loading && <div className="cart-loading">Loading…</div>}
 
       <BottomNav />
     </div>

@@ -1,0 +1,204 @@
+.cart-page {
+  max-width: 700px;
+  margin: 40px auto 120px;
+  padding: 32px;
+  background: linear-gradient(145deg, var(--food-white), var(--food-cream));
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(255, 107, 53, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cart-page > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 10px 20px;
+  background: var(--food-gray-light);
+  border-radius: 12px;
+  color: var(--food-text);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  will-change: transform;
+}
+
+.cart-page > a:hover {
+  background: var(--food-orange);
+  color: var(--food-white);
+  transform: translateX(-4px);
+}
+
+.cart-page h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  color: var(--food-text);
+  background: linear-gradient(135deg, var(--food-orange), var(--food-orange-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.cart-page > p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--food-text-light);
+  padding: 60px 20px;
+  font-weight: 500;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--food-white);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(255, 107, 53, 0.1);
+  animation: slideIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cart-item:nth-child(1) { animation-delay: 0.05s; }
+.cart-item:nth-child(2) { animation-delay: 0.1s; }
+.cart-item:nth-child(3) { animation-delay: 0.15s; }
+.cart-item:nth-child(4) { animation-delay: 0.2s; }
+.cart-item:nth-child(5) { animation-delay: 0.25s; }
+
+.cart-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
+}
+
+.cart-item-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--food-text);
+  flex: 1;
+}
+
+.cart-item-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--food-orange);
+}
+
+.cart-summary {
+  margin-top: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--food-white), var(--food-cream));
+  border-radius: 16px;
+  border: 2px solid rgba(255, 107, 53, 0.2);
+}
+
+.cart-summary-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--food-gray);
+  font-size: 1.1rem;
+}
+
+.cart-summary-row.points-discount {
+  background: rgba(255, 107, 53, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-bottom: none;
+}
+
+.cart-summary-row.points-discount .cart-summary-label {
+  color: var(--food-orange);
+  font-size: 0.95rem;
+}
+
+.cart-summary-row.points-discount .cart-summary-value.discount {
+  color: var(--food-green);
+  font-weight: 700;
+}
+
+.cart-summary-row.total-row {
+  border-bottom: none;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(255, 107, 53, 0.2);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.cart-summary-row.total-row .cart-summary-label {
+  color: var(--food-text);
+  font-size: 1.3rem;
+}
+
+.cart-summary-row.total-row .cart-summary-value.total {
+  color: var(--food-orange);
+  font-size: 1.8rem;
+}
+
+.cart-summary-label {
+  font-weight: 600;
+  color: var(--food-text);
+}
+
+.cart-summary-value {
+  font-weight: 700;
+  color: var(--food-text);
+}
+
+.points-info {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255, 107, 53, 0.05);
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.points-info small {
+  font-size: 0.9rem;
+  color: var(--food-text-light);
+  font-weight: 500;
+}
+
+.cart-loading {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--food-text-light);
+  text-align: center;
+  font-weight: 500;
+}
+

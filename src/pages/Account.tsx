@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
+import './Account.css'
 
 export default function Account() {
   const { session, signOut } = useAuth()
@@ -69,60 +70,62 @@ export default function Account() {
   if (!session) return <div>Please log in to view your account.</div>
 
   return (
-    <div className="card">
-      <h2 style={{ textAlign: 'center', marginBottom: 28 }}>Account Settings</h2>
+    <div className="account-page-wrapper">
+      <div className="card">
+        <h2 style={{ textAlign: 'center', marginBottom: 28 }}>Account Settings</h2>
 
-      <div className="form-group">
-        <label>Email</label>
-        <input type="email" value={session.user.email || ''} disabled />
-      </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input type="email" value={session.user.email || ''} disabled />
+        </div>
 
-      <div className="form-group">
-        <label>First Name</label>
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="Enter first name"
-        />
-      </div>
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="Enter first name"
+          />
+        </div>
 
-      <div className="form-group">
-        <label>Last Name</label>
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          placeholder="Enter last name"
-        />
-      </div>
+        <div className="form-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Enter last name"
+          />
+        </div>
 
-      <div className="form-row">
-        <input
-          type="checkbox"
-          checked={isRestaurant}
-          onChange={(e) => setIsRestaurant(e.target.checked)}
-        />
-        <label>Restaurant Account</label>
-      </div>
+        <div className="form-row">
+          <input
+            type="checkbox"
+            checked={isRestaurant}
+            onChange={(e) => setIsRestaurant(e.target.checked)}
+          />
+          <label>Restaurant Account</label>
+        </div>
 
-      <div className="button-row">
-        <button
-          onClick={updateProfile}
-          disabled={loading}
-          className="primary"
-        >
-          {loading ? 'Saving...' : 'Update Profile'}
-        </button>
+        <div className="button-row">
+          <button
+            onClick={updateProfile}
+            disabled={loading}
+            className="primary"
+          >
+            {loading ? 'Saving...' : 'Update Profile'}
+          </button>
 
-        <button onClick={signOut} className="secondary">
-          Sign Out
-        </button>
-      </div>
-      <div>
-        {isRestaurant &&
-          <Link to="/restaurants">View Your Restaurants</Link>
-        }
+          <button onClick={signOut} className="secondary">
+            Sign Out
+          </button>
+        </div>
+        <div>
+          {isRestaurant &&
+            <Link to="/restaurants">View Your Restaurants</Link>
+          }
+        </div>
       </div>
       <BottomNav/>
     </div>
