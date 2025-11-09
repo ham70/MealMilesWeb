@@ -1,0 +1,116 @@
+/* Page container */
+.restaurant-page {
+  min-height: 100vh;
+  background: #fefefe;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Hero header */
+.restaurant-hero {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.restaurant-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+  transition: transform 0.3s ease;
+}
+
+.restaurant-hero img:hover {
+  transform: scale(1.05);
+}
+
+/* Hero overlay text */
+.restaurant-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.restaurant-hero h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.restaurant-hero p {
+  color: #ddd;
+  font-size: 1.1rem;
+}
+
+/* Content section */
+.restaurant-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Menu heading */
+.restaurant-content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* Menu grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* FoodItemCard styles - card-based */
+.food-item-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.food-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.food-item-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.food-item-card .card-content {
+  padding: 12px 16px;
+}
+
+.food-item-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.food-item-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { supabase } from './supabaseClient'
-import { useAuth } from './contexts/AuthContext'
+import { supabase } from '../supabaseClient'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Account() {
   const { session, signOut } = useAuth()
@@ -67,56 +67,53 @@ export default function Account() {
   if (!session) return <div>Please log in to view your account.</div>
 
   return (
-    <div style={{ maxWidth: 500, margin: '50px auto', padding: 20, border: '1px solid #ccc', borderRadius: 8 }}>
-      <h2>Account</h2>
+    <div className="card">
+      <h2 style={{ textAlign: 'center', marginBottom: 28 }}>Account Settings</h2>
 
-      <div style={{ marginBottom: 16 }}>
+      <div className="form-group">
         <label>Email</label>
-        <input
-          type="email"
-          value={session.user.email || ''}
-          disabled
-          style={{ width: '100%', padding: 8, marginTop: 4 }}
-        />
+        <input type="email" value={session.user.email || ''} disabled />
       </div>
 
-      <div style={{ marginBottom: 16 }}>
+      <div className="form-group">
         <label>First Name</label>
         <input
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           placeholder="Enter first name"
-          style={{ width: '100%', padding: 8, marginTop: 4 }}
         />
       </div>
 
-      <div style={{ marginBottom: 16 }}>
+      <div className="form-group">
         <label>Last Name</label>
         <input
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           placeholder="Enter last name"
-          style={{ width: '100%', padding: 8, marginTop: 4 }}
         />
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16, gap: 8 }}>
-        <label>Restaurant Account</label>
+      <div className="form-row">
         <input
           type="checkbox"
           checked={isRestaurant}
           onChange={(e) => setIsRestaurant(e.target.checked)}
         />
+        <label>Restaurant Account</label>
       </div>
 
-      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-        <button onClick={updateProfile} disabled={loading} style={{ padding: 10, flex: 1 }}>
+      <div className="button-row">
+        <button
+          onClick={updateProfile}
+          disabled={loading}
+          className="primary"
+        >
           {loading ? 'Saving...' : 'Update Profile'}
         </button>
 
-        <button onClick={signOut} style={{ padding: 10, flex: 1 }}>
+        <button onClick={signOut} className="secondary">
           Sign Out
         </button>
       </div>
