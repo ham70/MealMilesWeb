@@ -1,9 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import Auth from './pages/Auth'
 import Account from './pages/Account'
 import Home from './pages/Home'
 import RestaurantPage from './pages/RestaurantPage'
+import RestaurantItem from './pages/RestaurantItem'
+import Cart from './pages/Cart'
 
 export default function AppRoutes() {
   const { session, loading } = useAuth()
@@ -12,6 +14,7 @@ export default function AppRoutes() {
 
   return (
     <BrowserRouter>
+    <Link to="/cart">Cart</Link>
       <Routes>
         {/* Public route */}
         <Route
@@ -31,6 +34,14 @@ export default function AppRoutes() {
         <Route
           path="/restaurant/:id"
           element={session ? <RestaurantPage/> : <Navigate to="/auth" replace />}
+        />
+        <Route
+          path="/restaurant/:restaurantId/item/:itemId"
+          element={session ? <RestaurantItem/> : <Navigate to="/auth" replace />}
+        />
+        <Route
+          path="/cart"
+          element={session ? <Cart/> : <Navigate to="/auth" replace />}
         />
 
         {/* Catch-all redirect */}
